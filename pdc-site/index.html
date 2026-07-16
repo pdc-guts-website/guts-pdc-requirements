@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="fil">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PDC Requirements & Guidelines | GUTS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#16202A;
+    --ink-soft:#3B4A57;
+    --paper:#F6F3ED;
+    --paper-raise:#FFFFFF;
+    --yellow:#F2B705;
+    --yellow-deep:#C98F00;
+    --green:#3B7A57;
+    --line:#D8D2C4;
+    --muted:#6B7480;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  h1,h2,h3,.eyebrow{ font-family:'Space Grotesk',sans-serif; }
+
+  /* ---------- Lane-marker divider (signature element) ---------- */
+  .lane{
+    width:100%;
+    height:3px;
+    background-image: repeating-linear-gradient(90deg, var(--yellow) 0 28px, transparent 28px 44px);
+    margin: 0;
+  }
+
+  /* ---------- Header ---------- */
+  header.hero{
+    background: var(--ink);
+    color:#F6F3ED;
+    padding: 56px 24px 64px;
+    position:relative;
+    overflow:hidden;
+  }
+  header.hero::after{
+    content:"";
+    position:absolute;
+    left:0; right:0; bottom:0;
+    height:6px;
+    background-image: repeating-linear-gradient(90deg, var(--yellow) 0 34px, transparent 34px 58px);
+  }
+  .hero-inner{
+    max-width: 880px;
+    margin: 0 auto;
+  }
+  .eyebrow{
+    display:inline-block;
+    font-size:13px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--yellow);
+    font-weight:600;
+    margin-bottom:14px;
+  }
+  h1{
+    font-size: clamp(28px, 5vw, 44px);
+    line-height:1.12;
+    margin: 0 0 10px;
+    font-weight:700;
+  }
+  .hero-sub{
+    color:#C7CDD3;
+    font-size:16px;
+    max-width:60ch;
+    margin:0;
+  }
+  .hero-note{
+    display:flex;
+    gap:10px;
+    align-items:flex-start;
+    margin-top:26px;
+    padding:14px 16px;
+    background: rgba(242,183,5,0.08);
+    border:1px solid rgba(242,183,5,0.35);
+    border-radius:10px;
+    font-size:14px;
+    color:#EFE7D5;
+    max-width: 640px;
+  }
+
+  main{
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+
+  section.block{
+    padding-top: 48px;
+  }
+
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    gap:14px;
+    margin-bottom:22px;
+  }
+  .section-icon{
+    font-size:22px;
+    line-height:1;
+  }
+  h2{
+    font-size: 22px;
+    margin:0;
+    font-weight:700;
+  }
+  .section-sub{
+    font-size:13px;
+    color:var(--muted);
+    margin: 2px 0 0;
+    font-style:italic;
+  }
+
+  /* ---------- Requirement list styled as mile markers ---------- */
+  ol.markers{
+    list-style:none;
+    margin:0; padding:0;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+  }
+  ol.markers li{
+    display:flex;
+    gap:16px;
+    align-items:flex-start;
+    background: var(--paper-raise);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:14px 18px;
+  }
+  .marker-num{
+    flex:0 0 auto;
+    width:30px; height:30px;
+    border-radius:8px;
+    background:var(--ink);
+    color:var(--yellow);
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:700;
+    font-size:14px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  li p{ margin:0; font-size:15px; line-height:1.5; }
+  li .fil{ color:var(--muted); font-size:13px; margin-top:3px; }
+
+  /* ---------- Vehicle scenario cards ---------- */
+  .cards{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px,1fr));
+    gap:16px;
+  }
+  .card{
+    background:var(--paper-raise);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:20px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  .card-top{
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .card-emoji{ font-size:22px; }
+  .card h3{ font-size:16px; margin:0; }
+  .card .fil-sub{ font-size:12.5px; color:var(--muted); margin:-6px 0 4px; }
+  .card ul{ margin:0; padding-left:18px; font-size:14px; line-height:1.55; }
+  .card ul li{ margin-bottom:4px; }
+  .owner-note{
+    font-size:13px;
+    color:var(--ink-soft);
+    background:#F0ECE1;
+    border-left:3px solid var(--yellow-deep);
+    padding:8px 10px;
+    border-radius:4px;
+  }
+
+  .download-btn{
+    margin-top:auto;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    justify-content:center;
+    background:var(--ink);
+    color:#fff;
+    text-decoration:none;
+    font-size:13.5px;
+    font-weight:600;
+    padding:10px 14px;
+    border-radius:8px;
+    transition: background .15s ease, transform .15s ease;
+  }
+  .download-btn:hover{ background:var(--green); transform: translateY(-1px); }
+  .download-btn svg{ width:15px; height:15px; flex:0 0 auto; }
+
+  /* ---------- Rental fee table ---------- */
+  table.fees{
+    width:100%;
+    border-collapse:collapse;
+    background:var(--paper-raise);
+    border:1px solid var(--line);
+    border-radius:12px;
+    overflow:hidden;
+    font-size:14.5px;
+  }
+  table.fees th, table.fees td{
+    text-align:left;
+    padding:12px 16px;
+  }
+  table.fees thead th{
+    background:var(--ink);
+    color:var(--yellow);
+    font-family:'Space Grotesk',sans-serif;
+    font-size:12.5px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+  }
+  table.fees tbody tr:not(:last-child){ border-bottom:1px solid var(--line); }
+  table.fees td.fee{ font-weight:700; color:var(--ink); }
+
+  /* ---------- Footer ---------- */
+  footer{
+    background:var(--ink);
+    color:#B9C0C7;
+    padding: 34px 24px;
+    text-align:center;
+    font-size:13px;
+  }
+  footer strong{ color:#F6F3ED; }
+
+  @media (max-width:560px){
+    header.hero{ padding:44px 18px 52px; }
+    main{ padding:0 16px 60px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <span class="eyebrow">GUTS &nbsp;•&nbsp; Driver Training</span>
+    <h1>Practical Driving Course<br>Requirements &amp; Guidelines</h1>
+    <p class="hero-sub">Mangyaring ihanda ang mga sumusunod bago dumalo sa inyong Practical Driving Course (PDC).</p>
+    <div class="hero-note">
+      📋 <span>Review each section below, prepare your documents, and download any forms you'll need before your scheduled session.</span>
+    </div>
+  </div>
+</header>
+<div class="lane"></div>
+
+<main>
+
+  <!-- STUDENT REQUIREMENTS -->
+  <section class="block" id="student">
+    <div class="section-head">
+      <span class="section-icon">👤</span>
+      <div>
+        <h2>Student Requirements</h2>
+        <p class="section-sub">Mga Kinakailangan ng Estudyante</p>
+      </div>
+    </div>
+
+    <ol class="markers">
+      <li>
+        <span class="marker-num">1</span>
+        <div>
+          <p>Isang (1) bagong 1×1 ID picture (para sa Training Card)</p>
+        </div>
+      </li>
+      <li>
+        <span class="marker-num">2</span>
+        <div>
+          <p>Valid Student Permit or Driver's License (hindi dapat expired)</p>
+        </div>
+      </li>
+      <li>
+        <span class="marker-num">3</span>
+        <div>
+          <p><strong>Official Receipt / Invoice</strong> — Opisyal na Resibo / Invoice</p>
+          <p class="fil">Walk-in Enrollment: Ipakita ang opisyal na resibo na ibinigay ng GUTS.<br>
+          Online Enrollment: Kunin ang inyong opisyal na resibo sa Cashier ng GUTS.</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <div class="lane" style="margin-top:48px;"></div>
+
+  <!-- GENERAL VEHICLE REQUIREMENTS -->
+  <section class="block" id="vehicle">
+    <div class="section-head">
+      <span class="section-icon">🚘</span>
+      <div>
+        <h2>General Vehicle Requirements — PDC (E)</h2>
+        <p class="section-sub">Kung gagamit ng sariling sasakyan, ihanda ang mga sumusunod:</p>
+      </div>
+    </div>
+
+    <ol class="markers">
+      <li>
+        <span class="marker-num">1</span>
+        <div>
+          <p>Updated Official Receipt (OR) and Certificate of Registration (CR) (hindi dapat expired)</p>
+        </div>
+      </li>
+      <li>
+        <span class="marker-num">2</span>
+        <div>
+          <p>Vehicle with a valid plate number</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <div class="lane" style="margin-top:48px;"></div>
+
+  <!-- VEHICLE SCENARIOS -->
+  <section class="block" id="scenarios">
+    <div class="section-head">
+      <span class="section-icon">🛣️</span>
+      <div>
+        <h2>Choose Your Vehicle Arrangement</h2>
+        <p class="section-sub">Pumili ng gagamiting sasakyan para sa inyong PDC</p>
+      </div>
+    </div>
+
+    <div class="cards">
+
+      <!-- Own vehicle -->
+      <div class="card">
+        <div class="card-top">
+          <span class="card-emoji">🚗</span>
+          <h3>If Using Your Own Vehicle</h3>
+        </div>
+        <p class="fil-sub">Kung Sariling Sasakyan ang Gagamitin</p>
+        <p style="font-size:14px; margin:0;">Ang nakapangalan sa OR/CR ay dapat:</p>
+        <ul>
+          <li>Ang estudyante</li>
+          <li>Isang miyembro ng pamilya</li>
+        </ul>
+        <p style="font-size:14px; margin:0;">Magpasa ng alinman sa sumusunod:</p>
+        <ul>
+          <li>Vehicle Waiver mula sa GUTS; o</li>
+          <li>Sariling kumpletong Vehicle Waiver Form</li>
+        </ul>
+        <a class="download-btn" href="forms/vehicle-waiver-form.pdf" download>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download Vehicle Waiver Form
+        </a>
+      </div>
+
+      <!-- Borrowed vehicle -->
+      <div class="card">
+        <div class="card-top">
+          <span class="card-emoji">🚙</span>
+          <h3>If Using a Borrowed Vehicle</h3>
+        </div>
+        <p class="fil-sub">Kung Hiram na Sasakyan ang Gagamitin</p>
+        <p style="font-size:14px; margin:0;">Ihanda ang mga sumusunod:</p>
+        <ul>
+          <li>Authorization Letter mula sa rehistradong may-ari</li>
+          <li>Updated OR/CR</li>
+        </ul>
+        <div class="owner-note">Kung hindi pa naililipat ang pangalan sa OR/CR, magsumite ng photocopy ng Deed of Sale.</div>
+        <a class="download-btn" href="forms/authorization-letter.pdf" download>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download Authorization Letter
+        </a>
+      </div>
+
+      <!-- Rental vehicle -->
+      <div class="card">
+        <div class="card-top">
+          <span class="card-emoji">🚕</span>
+          <h3>If Renting a Vehicle</h3>
+        </div>
+        <p class="fil-sub">Kung Magrerenta ng Sasakyan</p>
+        <p style="font-size:14px; margin:0 0 4px;">Mangyaring kumpletuhin ang Vehicle Rental Waiver.</p>
+        <a class="download-btn" href="forms/vehicle-rental-waiver.pdf" download>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download Vehicle Rental Waiver
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="lane" style="margin-top:48px;"></div>
+
+  <!-- RENTAL FEES -->
+  <section class="block" id="fees">
+    <div class="section-head">
+      <span class="section-icon">💵</span>
+      <div>
+        <h2>Vehicle Rental Fees</h2>
+        <p class="section-sub">Bayad sa Pagrenta ng Sasakyan</p>
+      </div>
+    </div>
+
+    <table class="fees">
+      <thead>
+        <tr><th>Vehicle Type</th><th>Rental Fee</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Motorcycle / Motorsiklo</td><td class="fee">₱500</td></tr>
+        <tr><td>Car / Kotse</td><td class="fee">₱800</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+</main>
+
+<div class="lane"></div>
+<footer>
+  <p><strong>GUTS Practical Driving Course</strong> — please bring all required documents on the day of your scheduled session.</p>
+</footer>
+
+</body>
+</html>
